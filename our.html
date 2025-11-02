@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>我爱你们呦</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 配置Tailwind自定义颜色和字体 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF9EBB',
+            secondary: '#A8DADC',
+            accent1: '#FFD166',
+            accent2: '#06D6A0',
+            accent3: '#118AB2',
+            accent4: '#EF476F',
+            accent5: '#9381FF',
+          },
+          fontFamily: {
+            cute: ['"Comic Sans MS"', '"Marker Felt"', '"Arial Rounded MT Bold"', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .popup-shadow {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+      .float-animation {
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+      }
+      .pulse-scale {
+        animation: pulse-scale 2s ease-in-out infinite;
+      }
+      @keyframes pulse-scale {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.03); }
+        100% { transform: scale(1); }
+      }
+      .spin-slow {
+        animation: spin 15s linear infinite;
+      }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .producer-animation {
+        animation: bounce 3s ease-in-out infinite;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen overflow-hidden relative">
+  <!-- 背景装饰 -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl spin-slow"></div>
+    <div class="absolute top-40 right-20 w-40 h-40 bg-secondary/20 rounded-full blur-3xl spin-slow" style="animation-direction: reverse;"></div>
+    <div class="absolute bottom-20 left-1/3 w-36 h-36 bg-accent1/20 rounded-full blur-3xl spin-slow"></div>
+    <div class="absolute bottom-40 right-1/4 w-32 h-32 bg-accent3/20 rounded-full blur-3xl spin-slow" style="animation-direction: reverse;"></div>
+  </div>
+
+  <!-- 主标题 - 响应式调整 -->
+  <div class="relative z-10 text-center pt-6 md:pt-10 px-4">
+    <h1 class="text-[clamp(1.2rem,8vw,3rem)] font-cute font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent4 to-accent5 pulse-scale">
+      满满的祝福送给你
+    </h1>
+    <p class="mt-2 md:mt-4 text-gray-600 font-cute text-sm md:text-base">接收来自四面八方的美好祝愿！</p>
+  </div>
+
+  <!-- 出品信息 - 移动端缩小 -->
+  <div class="fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none px-4">
+    <div class="bg-white/80 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full shadow-lg producer-animation max-w-[220px] md:max-w-none">
+      <p class="font-cute font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent5 text-xs md:text-lg">
+        慧慧出品，必属精品 ✨
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // 名字列表（按指定顺序排列）
+    const names = ['波波', '红红', '奕奕子', '骄骄', '慧慧'];
+    // 计数器用于控制名字顺序
+    let nameIndex = 0;
+    
+    // 祝福前缀和后缀
+    const prefixes = ['祝', '愿', '希望', '愿我们的', '祝福', '祈愿', '愿', '祝亲爱的', '愿可爱的', '祝最棒的'];
+    const wishes = [
+      '天天开心，笑容常在',
+      '身体健康，活力满满',
+      '工作顺利，事事顺心',
+      '平安喜乐，万事胜意',
+      '心想事成，美梦成真',
+      '好运连连，福气满满',
+      '轻松自在，无忧无虑',
+      '辛苦啦，要好好休息',
+      '每天都有小确幸',
+      '被世界温柔以待',
+      '生活明朗，万物可爱',
+      '日子甜甜，好运连连',
+      '心情愉悦，活力四射',
+      '烦恼拜拜，快乐常在',
+      '前程似锦，未来可期',
+      '笑口常开，好运自来',
+      '健康平安，幸福美满',
+      '事事顺心，天天好运',
+      '精神饱满，活力无限',
+      '每天进步，越来越好',
+      '平安喜乐，得偿所愿',
+      '无忧无虑，自在生活',
+      '岁月静好，现世安稳',
+      '万事顺意，喜乐长安',
+      '笑容灿烂，心情美丽',
+      '精力充沛，神采奕奕',
+      '困难远离，好运相伴',
+      '日子红火，幸福安康',
+      '温馨和睦，快乐永驻',
+      '如意吉祥，福寿安康'
+    ];
+    
+    // 弹窗背景颜色选项
+    const bgColors = [
+      'bg-gradient-to-br from-primary/90 to-pink-300/90',
+      'bg-gradient-to-br from-secondary/90 to-blue-300/90',
+      'bg-gradient-to-br from-accent1/90 to-yellow-300/90',
+      'bg-gradient-to-br from-accent2/90 to-green-300/90',
+      'bg-gradient-to-br from-accent3/90 to-blue-400/90',
+      'bg-gradient-to-br from-accent4/90 to-pink-400/90',
+      'bg-gradient-to-br from-accent5/90 to-purple-300/90',
+      'bg-gradient-to-br from-orange-300/90 to-pink-200/90',
+      'bg-gradient-to-br from-teal-300/90 to-blue-200/90',
+      'bg-gradient-to-br from-purple-300/90 to-pink-200/90',
+    ];
+    
+    // 图标列表
+    const icons = ['🎉', '💖', '✨', '🌸', '💐', '🌟', '😊', '🥳', '🎊', '💝', '💘', '💝', '🎁', '🎈', '💌', '💞', '💓', '💗', '💙', '💚', '💛', '💜'];
+    
+    // 创建祝福内容（按顺序并提高波波出现频率）
+    function createWishText() {
+      // 70%概率按顺序，30%概率随机选择波波（提高波波出现频率）
+      let name;
+      if (Math.random() < 0.3) {
+        // 30%概率直接选择波波
+        name = '波波';
+      } else {
+        // 70%概率按顺序选择
+        name = names[nameIndex];
+        // 更新索引，循环往复
+        nameIndex = (nameIndex + 1) % names.length;
+      }
+      
+      const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+      const wish = wishes[Math.floor(Math.random() * wishes.length)];
+      const icon1 = icons[Math.floor(Math.random() * icons.length)];
+      const icon2 = icons[Math.floor(Math.random() * icons.length)];
+      
+      // 随机生成不同的祝福格式
+      const formats = [
+        `${icon1} ${prefix} ${name} ${wish} ${icon2}`,
+        `${prefix} ${name}：${wish} ${icon1}`,
+        `${icon1} ${name}，${wish}`,
+        `${prefix} ${name} 每天都${wish.split('，')[0]} ${icon2}`
+      ];
+      
+      return formats[Math.floor(Math.random() * formats.length)];
+    }
+    
+    // 创建弹窗 - 移动端优化
+    function createPopup() {
+      const popup = document.createElement('div');
+      const isMobile = window.innerWidth < 768;
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const headerHeight = isMobile ? 100 : 150; // 顶部标题区域高度
+      const footerHeight = isMobile ? 60 : 80;  // 底部信息区域高度
+      
+      // 计算可用区域，避免与顶部标题和底部信息重叠
+      const availableHeight = screenHeight - headerHeight - footerHeight;
+      
+      // 随机位置（适配移动端，避免重叠）
+      const left = Math.random() * (screenWidth - (isMobile ? 150 : 250)) + 10;
+      const top = headerHeight + Math.random() * availableHeight;
+      
+      // 随机样式（移动端更小）
+      const bgColor = bgColors[Math.floor(Math.random() * bgColors.length)];
+      const width = isMobile ? Math.random() * 50 + 150 : Math.random() * 80 + 180; // 移动端150-200px，桌面180-260px
+      const rotation = (Math.random() * 8) - 4; // -4到4度的旋转
+      const fontSize = isMobile ? Math.random() * 2 + 12 : Math.random() * 4 + 14; // 移动端12-14px，桌面14-18px
+      
+      // 设置弹窗样式
+      popup.className = `fixed rounded-3xl p-3 md:p-4 text-white font-cute popup-shadow float-animation transition-all duration-500 ease-out transform opacity-0`;
+      popup.style.left = `${left}px`;
+      popup.style.top = `${top}px`;
+      popup.style.width = `${width}px`;
+      popup.style.transform = `rotate(${rotation}deg)`;
+      popup.style.fontSize = `${fontSize}px`;
+      popup.classList.add(...bgColor.split(' '));
+      
+      // 设置内容
+      popup.innerHTML = `
+        <div class="text-center leading-relaxed">
+          <p>${createWishText()}</p>
+        </div>
+      `;
+      
+      // 添加到页面
+      document.body.appendChild(popup);
+      
+      // 淡入效果
+      setTimeout(() => {
+        popup.style.opacity = '1';
+      }, 10);
+      
+      // 自动移除
+      setTimeout(() => {
+        popup.style.opacity = '0';
+        setTimeout(() => {
+          popup.remove();
+        }, 500);
+      }, 5000 + Math.random() * 3000);
+    }
+    
+    // 弹窗间隔 - 移动端适当放缓，避免过于密集
+    const isMobile = window.innerWidth < 768;
+    const intervalTime = isMobile ? 300 + Math.random() * 200 : 200 + Math.random() * 150;
+    setInterval(createPopup, intervalTime);
+    
+    // 初始弹窗数量 - 移动端适当减少
+    const initialCount = isMobile ? 8 : 15;
+    for (let i = 0; i < initialCount; i++) {
+      setTimeout(createPopup, i * 100);
+    }
+    
+    // 窗口大小改变时调整弹窗位置
+    window.addEventListener('resize', () => {
+      const popups = document.querySelectorAll('.popup-shadow');
+      const isMobile = window.innerWidth < 768;
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const headerHeight = isMobile ? 100 : 150;
+      const footerHeight = isMobile ? 60 : 80;
+      
+      popups.forEach(popup => {
+        const currentWidth = popup.offsetWidth;
+        const currentHeight = popup.offsetHeight;
+        
+        // 调整弹窗大小以适应屏幕
+        if (isMobile && currentWidth > 200) {
+          popup.style.width = '180px';
+        } else if (!isMobile && currentWidth < 180) {
+          popup.style.width = '180px';
+        }
+        
+        // 调整字体大小
+        popup.style.fontSize = isMobile ? '13px' : '15px';
+        
+        // 确保弹窗不会超出窗口和覆盖顶部底部内容
+        let left = parseInt(popup.style.left);
+        let top = parseInt(popup.style.top);
+        
+        if (left + currentWidth > screenWidth) {
+          left = screenWidth - currentWidth - 10;
+        }
+        if (top < headerHeight) {
+          top = headerHeight + 10;
+        }
+        if (top + currentHeight > screenHeight - footerHeight) {
+          top = screenHeight - currentHeight - footerHeight - 10;
+        }
+        
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+      });
+    });
+  </script>
+</body>
+</html>
