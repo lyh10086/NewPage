@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贝斯社活动详情 - 校园贝斯社</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            background-color: #1D2129;
+            background-image: url('https://www.transparenttextures.com/patterns/grid-pattern.png');
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: #F2F3F5;
+            background-blend-mode: overlay;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(22, 93, 255, 0.3);
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #165DFF;
+            text-shadow: 0 0 8px rgba(22, 93, 255, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #4E5969;
+            font-size: 1.1rem;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: transparent;
+            border: 1px solid #165DFF;
+            color: #165DFF;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background-color: rgba(22, 93, 255, 0.1);
+            color: #00C48C;
+            border-color: #00C48C;
+            box-shadow: 0 0 10px rgba(22, 93, 255, 0.4);
+        }
+        
+        .event-detail {
+            background-color: rgba(29, 33, 41, 0.7);
+            border: 1px solid rgba(22, 93, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .event-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(22, 93, 255, 0.3);
+        }
+        
+        .event-detail h2 {
+            color: #00C48C;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 196, 140, 0.3);
+        }
+        
+        .event-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .event-image {
+            flex: 1 1 300px;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(22, 93, 255, 0.2);
+        }
+        
+        .event-text {
+            flex: 2 1 500px;
+        }
+        
+        .event-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #F2F3F5;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(22, 93, 255, 0.3);
+            color: #4E5969;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>校园贝斯社 - 活动详情</h1>
+            <p>低频共振 · 燃动青春</p>
+        </div>
+        
+        <a href="job3.html" class="back-btn">
+            <i class="fa fa-arrow-left mr-2"></i>返回贝斯社招新主页
+        </a>
+        
+        <!-- 活动详情1 -->
+        <div class="event-detail" id="performance">
+            <h2>校园音乐节表演</h2>
+            <div class="event-content">
+                <div class="event-image">
+                    <img src="9.jpg" alt="校园音乐节表演">
+                </div>
+                <div class="event-text">
+                    <p>2024年校园音乐节上，校园贝斯社组建的"律动之星"乐队带来了精彩的表演。乐队以一首原创曲目《暗夜律动》震撼全场，低沉有力的贝斯线条贯穿整首歌曲，与吉他、鼓组完美配合，营造出极具感染力的音乐氛围。</p>
+                    <p>演出过程中，贝斯手林宇轩的精彩独奏赢得了台下观众的阵阵掌声。他灵活的指法、精准的节奏控制以及富有情感的演奏，充分展现了贝斯乐器的独特魅力。乐队还表演了《加州旅馆》《Sweet Child O' Mine》等经典曲目，重新编排的贝斯部分为歌曲注入了新的活力。</p>
+                    <p>此次演出不仅展示了贝斯社社员的专业水平，也让更多人了解了贝斯乐器的魅力。演出结束后，许多观众表示被贝斯的独特音色所吸引，纷纷咨询加入贝斯社的相关事宜。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动详情2 -->
+        <div class="event-detail" id="masterclass">
+            <h2>专业大师课</h2>
+            <div class="event-content">
+                <div class="event-image">
+                    <img src="10.jpg" alt="专业大师课">
+                </div>
+                <div class="event-text">
+                    <p>为了提升社员的专业水平，校园贝斯社特别邀请了国内知名贝斯演奏家、音乐制作人王教授来校举办大师课。王教授拥有超过20年的贝斯演奏和教学经验，曾为众多知名歌手和乐队录制专辑，在业内享有很高的声誉。</p>
+                    <p>大师课上，王教授围绕贝斯演奏技巧、音乐理论、乐队配合等方面进行了详细的讲解和示范。他针对社员们在演奏中遇到的问题进行了一对一的指导，分享了自己多年的演奏经验和练习方法。</p>
+                    <p>在互动环节，社员们积极提问，王教授耐心解答了大家关于风格把握、技巧提升、设备选择等方面的问题。他还现场演奏了多首经典曲目，精湛的技艺让社员们深受启发。</p>
+                    <p>此次大师课让社员们受益匪浅，不仅提升了专业技能，还开阔了音乐视野。许多社员表示，通过与大师的交流，自己对贝斯演奏有了新的认识和理解，在今后的练习中会更加有针对性。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动详情3 -->
+        <div class="event-detail" id="rehearsal">
+            <h2>日常排练</h2>
+            <div class="event-content">
+                <div class="event-image">
+                    <img src="11.jpg" alt="日常排练">
+                </div>
+                <div class="event-text">
+                    <p>校园贝斯社的日常排练，是我们社团活力与凝聚力的核心所在，是每位社员从青涩走向成熟的音乐阶梯。为了系统性地提升社员的演奏水平，我们每周固定安排了三次排练，每一次都目标明确，各有侧重。
+
+每周二的夜晚，是属于基础夯实营的时间。这是为新社员和基础稍弱的同学量身打造的入门课堂。在这里，我们没有复杂的曲目压力，而是从最根本的基本功开始：稳定拍感的爬格子练习、正确的手型与指法纠正、以及贝斯线与和弦根音的关系理解。老社员会耐心地担任“小教练”，分享他们的经验。这个晚上，排练厅里回荡的往往不是激昂的旋律，而是节拍器稳定有力的“嘀嗒”声和琴弦上流淌出的、一遍又一遍却至关重要的基础音阶。这是打磨基石的时刻，虽显枯燥，却为未来的飞跃积蓄着力量。
+这几次排练，如同三个紧密咬合的齿轮，驱动着贝斯社不断向前。它不仅是技能的提升，更是友情的凝聚，是让我们在繁忙学业之余，能找到归属感、用音乐彼此对话的温暖港湾。

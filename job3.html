@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园贝斯社 2025 年招新网页（含背景音乐）</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 统一的 Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        techBlue: '#165DFF', // 科技蓝主色
+                        techCyan: '#00C48C', // 科技青辅助色
+                        techPurple: '#722ED1', // 科技紫点缀色
+                        techDark: '#1D2129', // 深色背景
+                        techLight: '#F2F3F5', // 浅色文本
+                        techGray: '#4E5969', // 灰色文本
+                    },
+                    fontFamily: {
+                        tech: ['Inter', 'Roboto', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'tech-grid': "url('https://www.transparenttextures.com/patterns/grid-pattern.png')",
+                        'tech-gradient': "linear-gradient(135deg, #1D2129 0%, #0F1419 100%)",
+                    },
+                    animation: {
+                        'pulse-tech': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float-tech': 'float 3s ease-in-out infinite',
+                        'glow-tech': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                            '100%': { transform: 'translateY(0px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 10px rgba(22, 93, 255, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(22, 93, 255, 0.8), 0 0 30px rgba(0, 196, 140, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-glow {
+                text-shadow: 0 0 8px rgba(22, 93, 255, 0.7), 0 0 12px rgba(0, 196, 140, 0.5);
+            }
+            .border-glow {
+                box-shadow: 0 0 8px rgba(22, 93, 255, 0.6);
+            }
+            .bg-tech-blur {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+            .tech-card-hover {
+                transition: all 0.3s ease;
+            }
+            .tech-card-hover:hover {
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 0 20px rgba(22, 93, 255, 0.7), 0 0 30px rgba(114, 46, 209, 0.4);
+            }
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            background-color: #1D2129;
+            background-image: url('https://www.transparenttextures.com/patterns/grid-pattern.png');
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: #F2F3F5;
+            background-blend-mode: overlay;
+        }
+        
+        /* 导航链接样式 */
+        .nav-link {
+            position: relative;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #165DFF, #00C48C);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #165DFF;
+            background-color: rgba(22, 93, 255, 0.1);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 表单样式 */
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(22, 93, 255, 0.3);
+            color: #F2F3F5;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #165DFF;
+            box-shadow: 0 0 10px rgba(22, 93, 255, 0.5);
+            outline: none;
+        }
+        
+        /* 按钮样式 */
+        .btn-primary {
+            background: linear-gradient(90deg, #165DFF, #00C48C);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(22, 93, 255, 0.6);
+            filter: brightness(1.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #165DFF;
+            color: #165DFF;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(22, 93, 255, 0.1);
+            box-shadow: 0 0 10px rgba(22, 93, 255, 0.4);
+            color: #00C48C;
+            border-color: #00C48C;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #272C36;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #165DFF, #722ED1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00C48C, #165DFF);
+            box-shadow: 0 0 5px rgba(22, 93, 255, 0.5);
+        }
+        
+        /* 图片悬停效果 */
+        .img-hover {
+            transition: all 0.5s ease;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .img-hover img {
+            transition: all 0.5s ease;
+            transform: scale(1.05);
+        }
+        
+        .img-hover:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.05);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 表格样式 */
+        .tech-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th {
+            background: linear-gradient(90deg, #165DFF, #00C48C);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .tech-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        .tech-table tr:hover {
+            background-color: rgba(22, 93, 255, 0.08);
+        }
+        
+        .tech-table td, .tech-table th {
+            border: 1px solid rgba(22, 93, 255, 0.2);
+            padding: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 背景音乐控制：左上角 -->
+    <div class="fixed top-4 left-4 z-50 bg-techDark bg-opacity-80 border border-techBlue/30 rounded-lg p-2 border-glow">
+        <button id="music-toggle" class="flex items-center justify-center text-techBlue hover:text-techCyan transition-colors">
+            <i class="fa fa-music text-xl mr-2"></i>
+            <span class="text-sm">播放音乐</span>
+        </button>
+        <audio id="background-music" src="music.mp3" loop preload="auto">
+            您的浏览器不支持 audio 标签。
+        </audio>
+    </div>
+
+    <!-- 顶部锚点（返回顶部用） -->
+    <a name="top"></a>
+
+    <!-- 头部横幅 -->
+    <header class="relative bg-tech-gradient py-16 md:py-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-tech-grid"></div>
+        <!-- 装饰性线条 -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient(90deg, transparent, #165DFF, transparent)"></div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient(90deg, transparent, #00C48C, transparent)"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white text-glow font-tech">
+                        <span class="text-techBlue">BASS</span> 校园贝斯社
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-6 text-techCyan">
+                        低频共振 · 燃动青春
+                    </p>
+                    <p class="mt-4 text-techLight text-lg md:text-xl max-w-2xl mx-auto md:mx-0">
+                        2025年春季学期招新正式启动，用贝斯的律动连接你我，在音乐的世界里释放热爱与创造力
+                    </p>
+                    <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#signup" class="btn-primary px-8 py-3 rounded-md text-lg">
+                            <i class="fa fa-rocket mr-2"></i>立即报名
+                        </a>
+                        <a href="#intro" class="btn-secondary px-8 py-3 rounded-md text-lg">
+                            <i class="fa fa-info-circle mr-2"></i>了解更多
+                        </a>
+                    </div>
+                </div>
+                <div class="animate-float-tech">
+                    <div class="img-hover border border-techBlue/50 rounded-xl overflow-hidden shadow-lg border-glow">
+                        <img src="1.jpg" 
+                             alt="校园贝斯社招新海报" 
+                             class="w-64 md:w-80 lg:w-96 h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 导航条：页内锚点跳转 -->
+    <nav class="bg-techDark bg-opacity-90 bg-tech-blur sticky top-0 z-40 border-b border-techBlue/20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center py-4">
+                <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-techLight">
+                    <li><a href="#intro" class="nav-link">社团简介</a></li>
+                    <li><a href="#activities" class="nav-link">活动安排</a></li>
+                    <li><a href="#show" class="nav-link">风采展示</a></li>
+                    <li><a href="#stories" class="nav-link">社员故事</a></li>
+                    <li><a href="#signup" class="nav-link">在线报名</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- 一、社团简介 -->
+        <section id="intro" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-techBlue text-glow mb-4">一、社团简介</h2>
+                    <div class="w-32 h-1 bg-gradient(90deg, transparent, #165DFF, transparent) mx-auto"></div>
+                </div>
+                
+                <div class="bg-techDark bg-opacity-70 rounded-xl p-6 md:p-8 border border-techBlue/30 tech-card-hover">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3">
+                            <div class="img-hover h-full">
+                                <img src="2.jpg" 
+                                     alt="贝斯乐器展示" 
+                                     class="w-full h-auto rounded-lg">
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-2/3 space-y-4">
+                            <p class="text-techLight leading-relaxed">
+                                校园贝斯社成立于2012年，是学校极具影响力的音乐类社团之一，累计吸纳社员超过800人，多次获得校级"优秀学生社团"称号。社团以贝斯乐器为核心，致力于推广贝斯文化，搭建音乐交流平台，培养学生的音乐素养与团队协作能力。
+                            </p>
+                            <p class="text-techLight leading-relaxed">
+                                贝斯作为乐队的"基石"，是连接节奏与旋律的关键乐器，其低沉而富有律动的音色能够为音乐赋予灵魂。无论是摇滚、爵士、流行还是 funk、金属等风格，贝斯都扮演着不可或缺的角色。社团专注于贝斯演奏技巧的传授、音乐理论的普及以及乐队协作的培养，让每位社员都能在音乐中找到属于自己的位置。
+                            </p>
+                                                       <p class="text-techLight leading-relaxed">
+                                无论你是零基础的音乐爱好者，还是有一定基础的贝斯玩家，只要你热爱音乐、热爱贝斯，我们都热烈欢迎你的加入。社团将为每位社员提供系统化的教学指导、丰富的演出机会以及广阔的交流平台，让你在大学时光中与音乐为伴，与志同道合的朋友一起成长。
+                            </p>
+                            <p class="text-techLight leading-relaxed">
+                                社团定期举办各类音乐活动，包括技术交流会、主题音乐会、乐队大赛、音乐沙龙等，同时与校内外其他音乐社团保持密切合作，为社员提供更多展示自我的舞台。在这里，你不仅能学到专业的贝斯演奏技巧，还能结识一群热爱音乐的朋友，共同组建乐队，创作属于自己的音乐作品。
+                            </p>
+                            <p class="text-techLight leading-relaxed">
+                                我们坚信，音乐是无边界的语言，贝斯是传递情感的桥梁。加入校园贝斯社，让我们用低频的律动点燃青春的激情，用音乐的力量书写精彩的大学篇章。无论你追求的是专业的演奏水平，还是纯粹的音乐乐趣，这里都将是你理想的归属。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#top" class="inline-flex items-center text-techBlue hover:text-techCyan transition-colors bg-techDark bg-opacity-50 px-6 py-2 rounded-md border border-techBlue/30">
+                        <i class="fa fa-arrow-up mr-2"></i>返回顶部
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-1 bg-gradient(90deg, transparent, #165DFF, #00C48C, transparent) my-16"></div>
+
+        <!-- 二、活动安排（表格 + 合并单元格） -->
+        <section id="activities" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-techBlue text-glow mb-4">二、本学期主要活动安排</h2>
+                    <div class="w-32 h-1 bg-gradient(90deg, transparent, #165DFF, transparent) mx-auto"></div>
+                    <p class="mt-6 text-techGray text-lg">
+                        以下为2025年春季学期核心活动规划，具体时间可能根据学校安排微调，详情将通过社团通知发布
+                    </p>
+                </div>
+                
+                <div class="overflow-x-auto bg-techDark bg-opacity-70 rounded-xl border border-techBlue/30 p-4">
+                    <table class="tech-table w-full">
+                        <thead>
+                            <tr>
+                                <!-- 合并4列作为表格标题 -->
+                                <th colspan="4" class="py-4 px-6 text-xl">贝斯社 2025 年春季学期活动安排表</th>
+                            </tr>
+                            <tr>
+                                <th class="py-3 px-4">活动名称</th>
+                                <th class="py-3 px-4">活动时间</th>
+                                <th class="py-3 px-4">活动地点</th>
+                                <th class="py-3 px-4">负责人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-3 px-4">新成员见面会</td>
+                                <td class="py-3 px-4">3月第2周 周五晚 19:00-21:00</td>
+                                <!-- 合并两行地点 -->
+                                <td class="py-3 px-4" rowspan="2">大学生活动中心 音乐排练厅 202</td>
+                                <td class="py-3 px-4">张明宇（社长）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">贝斯基础教学公开课</td>
+                                <td class="py-3 px-4">3月第3周 周日下午 14:00-17:00</td>
+                                <td class="py-3 px-4">李浩然（技术部部长）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">贝斯技术交流会</td>
+                                <td class="py-3 px-4">4月第1周 周六下午 15:00-18:00</td>
+                                <td class="py-3 px-4">音乐楼 301 教室</td>
+                                <td class="py-3 px-4">王嘉乐（教学组组长）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">校园乐队组建沙龙</td>
+                                <td class="py-3 px-4">4月第3周 周五晚 19:00-22:00</td>
+                                <td class="py-3 px-4">大学生活动中心 多功能厅</td>
+                                <td class="py-3 px-4">陈雨欣（活动部部长）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">贝斯独奏/合奏大赛</td>
+                                <td class="py-3 px-4">5月第2周 周六全天</td>
+                                <td class="py-3 px-4">学校大礼堂</td>
+                                <td class="py-3 px-4">全体理事会成员</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">校外音乐交流演出</td>
+                                <td class="py-3 px-4">5月第4周 周日</td>
+                                <td class="py-3 px-4">市文化艺术中心</td>
+                                <td class="py-3 px-4">张明宇（社长）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">期末主题音乐会</td>
+                                <td class="py-3 px-4">6月第2周 周六晚 19:30-21:30</td>
+                                <td class="py-3 px-4">学校大礼堂</td>
+                                <td class="py-3 px-4">全体社员</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-10 bg-techDark bg-opacity-50 rounded-xl p-6 border border-techBlue/20">
+                    <h3 class="text-xl font-semibold mb-4 text-techCyan">日常训练安排</h3>
+                    <ul class="list-disc list-inside space-y-3 text-techLight">
+                        <li>每周一晚 19:00-21:00：基础指法与技巧训练（面向新手）</li>
+                        <li>每周三晚 19:00-21:30：进阶技巧与曲目练习（面向有基础社员）</li>
+                        <li>每周五晚 18:30-22:00：乐队合奏排练（面向乐队成员）</li>
+                        <li>每周日上午 9:00-12:00：自由练习与一对一指导</li>
+                        <li>每月最后一周周六：特邀嘉宾讲座/大师课（具体时间另行通知）</li>
+                    </ul>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#top" class="inline-flex items-center text-techBlue hover:text-techCyan transition-colors bg-techDark bg-opacity-50 px-6 py-2 rounded-md border border-techBlue/30">
+                        <i class="fa fa-arrow-up mr-2"></i>返回顶部
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-1 bg-gradient(90deg, transparent, #165DFF, #00C48C, transparent) my-16"></div>
+
+        <!-- 三、风采展示：图片链接 + 多媒体 -->
+        <section id="show" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-techBlue text-glow mb-4">三、贝斯社风采展示</h2>
+                    <div class="w-32 h-1 bg-gradient(90deg, transparent, #165DFF, transparent) mx-auto"></div>
+                    <p class="mt-6 text-techGray text-lg">
+                        以下为往届社团活动精彩瞬间，点击图片可查看详细活动介绍
+                    </p>
+                </div>
+
+                <!-- 顶部大图（带跳转） -->
+                <div class="mb-10">
+                    <a href="club_intro.html" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover">
+                                <img src="3.jpg" 
+                                     alt="贝斯社风采全景" 
+                                     class="w-full h-80 object-cover">
+                            </div>
+                            <div class="p-4 text-center">
+                                <span class="inline-block bg-techBlue/20 text-techBlue px-4 py-2 rounded-full text-sm font-medium hover:bg-techBlue/30 transition-colors">
+                                    查看更多精彩瞬间 <i class="fa fa-arrow-right ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- 图片网格 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                    <!-- 图片1 -->
+                    <a href="club_intro.html#performance" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover h-64">
+                                <img src="4.jpg" 
+                                     alt="贝斯演奏表演" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold mb-2 text-techCyan">校园音乐节表演</h3>
+                                <p class="text-techGray">2024年校园音乐节，社团乐队合奏《暗夜律动》，震撼全场</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 图片2 -->
+                    <a href="club_intro.html#masterclass" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover h-64">
+                                <img src="5.jpg" 
+                                     alt="专业大师课" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold mb-2 text-techCyan">专业大师课</h3>
+                                <p class="text-techGray">邀请知名贝斯演奏家举办大师班，为社员提供专业指导</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <!-- 图片3 -->
+                    <a href="club_intro.html#rehearsal" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover h-48">
+                                <img src="6.jpg" 
+                                     alt="日常排练" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="text-md font-semibold mb-1 text-techCyan">日常排练</h3>
+                                <p class="text-sm text-techGray">社员们在排练厅专注练习，共同打磨曲目</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 图片4 -->
+                    <a href="club_intro.html#competition" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover h-48">
+                                <img src="7.jpg" 
+                                     alt="贝斯大赛" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="text-md font-semibold mb-1 text-techCyan">贝斯大赛</h3>
+                                <p class="text-sm text-techGray">校内贝斯独奏大赛，社员展现精湛技艺</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 图片5 -->
+                    <a href="club_intro.html#exchange" class="block">
+                        <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl overflow-hidden border border-techBlue/30">
+                            <div class="img-hover h-48">
+                                <img src="8.jpg" 
+                                     alt="校际交流" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="text-md font-semibold mb-1 text-techCyan">校际交流</h3>
+                                <p class="text-sm text-techGray">与兄弟院校贝斯社开展交流活动，共同演出</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- 宣传视频 -->
+<!-- 宣传视频 -->
+<!-- 宣传视频 -->
+<div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl p-6 border border-techBlue/30 mb-10">
+    <h3 class="text-xl font-semibold mb-6 text-center text-techCyan">社团宣传视频</h3>
+    <div class="relative aspect-video bg-techDark/50 rounded-lg overflow-hidden max-w-3xl mx-auto group">
+        <!-- 视频容器：默认显示画面，移除hover才显示的逻辑 -->
+        <video id="promo-video" 
+               src="video.mp4" 
+               type="video/mp4" 
+               class="rounded-lg w-full h-full object-cover opacity-100 transition-opacity duration-500">
+        </video>
+        
+        <!-- 播放按钮覆盖层：默认显示，点击后隐藏 -->
+        <div id="play-button" class="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-gradient-to-t from-techDark/80 to-transparent">
+            <div class="w-20 h-20 rounded-full bg-techBlue/80 flex items-center justify-center mb-4 transform group-hover:scale-110 transition-transform duration-300 border-glow">
+                <i class="fa fa-play text-3xl text-white ml-1"></i>
+            </div>
+            <p class="text-white font-medium text-lg">点击播放视频</p>
+        </div>
+    </div>
+</div>
+<div class="mt-10 text-center">
+    <a href="#top" class="inline-flex items-center text-techBlue hover:text-techCyan transition-colors bg-techDark bg-opacity-50 px-6 py-2 rounded-md border border-techBlue/30">
+        <i class="fa fa-arrow-up mr-2"></i>返回顶部
+    </a>
+</div>
+            </div>
+        </section>
+
+        <div class="w-full h-1 bg-gradient(90deg, transparent, #165DFF, #00C48C, transparent) my-16"></div>
+
+        <!-- 四、社员故事 -->
+        <section id="stories" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-techBlue text-glow mb-4">四、社员故事</h2>
+                    <div class="w-32 h-1 bg-gradient(90deg, transparent, #165DFF, transparent) mx-auto"></div>
+                    <p class="mt-6 text-techGray text-lg">
+                        在这里，每一位社员都有属于自己的音乐故事
+                    </p>
+                </div>
+                
+                <div class="space-y-10">
+                    <!-- 故事1 -->
+                    <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl p-6 md:p-8 border border-techBlue/30">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/4">
+                                <div class="rounded-full overflow-hidden border-2 border-techBlue/50 w-32 h-32 mx-auto">
+                                    <img src="小李.jpg" 
+                                         alt="社员照片" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-center mt-3 text-techCyan font-medium">小李 | 大二 | 计算机系</p>
+                            </div>
+                            
+                            <div class="md:w-3/4 space-y-4">
+                                <h3 class="text-xl font-semibold text-techBlue">从零基础到乐队贝斯手</h3>
+                                <p class="text-techLight leading-relaxed">
+                                    大一入学时，我对音乐几乎一窍不通，更别说贝斯这种相对小众的乐器了。一次偶然的机会，我在校园音乐节上看到了贝斯社的表演，那低沉而富有律动的音色瞬间吸引了我。当时我就下定决心，一定要学会这门乐器。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    加入社团后，我从最基础的持琴姿势、手指按弦开始学起。刚开始练习时，手指经常被琴弦磨得红肿疼痛，按弦的力度和位置也总是掌握不好，一度想要放弃。但社团的学姐学长们一直鼓励我，耐心地纠正我的错误动作，还分享了很多练习技巧。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    社团的日常训练非常系统，从基础乐理到指法技巧，再到曲目练习，循序渐进地引导我们成长。我坚持每周参加所有的训练活动，利用课余时间反复练习。慢慢地，我的演奏技巧有了明显进步，从只能弹简单的分解和弦，到能够完整演奏复杂的曲目。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    大二下学期，我加入了社团组建的乐队"律动之星"，担任贝斯手。和乐队成员一起排练、创作、演出的日子，成为了我大学生活中最珍贵的回忆。我们一起参加了校园乐队大赛，获得了二等奖的好成绩；一起在音乐节上演出，感受台下观众的热情欢呼。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    贝斯不仅让我学会了一门乐器，更让我收获了珍贵的友谊和宝贵的成长经历。它教会我坚持的意义，让我在面对困难时更加勇敢；它让我学会了团队协作，明白音乐是需要彼此配合才能产生最美的旋律。现在，贝斯已经成为我生活中不可或缺的一部分，无论学习多忙，我都会抽出时间练习。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    如果你也热爱音乐，即使没有任何基础，也欢迎加入贝斯社。这里有专业的指导、友善的伙伴和丰富的机会，相信你一定能在这里找到属于自己的音乐乐趣，收获意想不到的成长。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 故事2 -->
+                    <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl p-6 md:p-8 border border-techBlue/30">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/4">
+                                <div class="rounded-full overflow-hidden border-2 border-techBlue/50 w-32 h-32 mx-auto">
+                                    <img src="小钱.jpg" 
+                                         alt="社员照片" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-center mt-3 text-techCyan font-medium">小钱 | 大四 | 音乐系</p>
+                            </div>
+                            
+                            <div class="md:w-3/4 space-y-4">
+                                <h3 class="text-xl font-semibold text-techBlue">贝斯陪伴我的大学四年</h3>
+                                <p class="text-techLight leading-relaxed">
+                                    作为音乐系的学生，我从小学习钢琴，但一直对贝斯有着特殊的热爱。考入大学后，我毫不犹豫地加入了贝斯社，这一呆就是四年。回首这四年的时光，贝斯社见证了我的成长，也成为了我大学生活中最温暖的港湾。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    刚加入社团时，我虽然有一定的音乐基础，但在贝斯演奏上还是个新手。社团的指导老师非常专业，不仅教会了我贝斯的演奏技巧，还引导我理解贝斯在乐队中的角色和意义。通过老师的指导和与社员们的交流，我的贝斯水平得到了快速提升。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    在贝斯社的四年里，我参加了无数次活动和演出。从最初的校内小型演出，到后来的校际交流、市级比赛，每一次经历都让我受益匪浅。记得第一次参加市级贝斯大赛时，我非常紧张，是社团的伙伴们一直鼓励我，帮我排练、调整状态。最终，我获得了青年组三等奖的好成绩，这离不开社团的支持和帮助。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    除了演出和比赛，社团的日常训练和交流也让我收获良多。在这里，我结识了一群志同道合的朋友，我们一起讨论音乐、分享技巧、组建乐队。我们会为了一首曲目的编排反复打磨，会为了一次演出的成功共同努力，也会在遇到困难时互相支持、彼此鼓励。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    大三时，我成为了社团的教学组组长，负责指导新社员的基础教学。在教学的过程中，我不仅巩固了自己的专业知识，还学会了如何与人沟通、如何传递知识。看到新社员们从零基础一步步成长，能够独立演奏曲目，那种成就感是无法用言语形容的。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    即将毕业，我心中充满了不舍。贝斯社就像一个大家庭，这里有欢笑、有汗水、有成长、有感动。贝斯已经成为我生活中不可或缺的一部分，它不仅是一种乐器，更是一种陪伴、一种信仰。我会带着在贝斯社学到的知识和技能，带着这份对音乐的热爱，在未来的道路上继续前行。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    对于想要加入贝斯社的学弟学妹们，我想说：音乐是一种美好的语言，贝斯是一种充满魅力的乐器。无论你是否有音乐基础，只要你热爱音乐、愿意付出努力，贝斯社都会为你提供一个展示自我、实现梦想的平台。在这里，你不仅能学到专业的演奏技巧，还能收获珍贵的友谊和难忘的回忆。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 故事3 -->
+                    <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl p-6 md:p-8 border border-techBlue/30">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/4">
+                                <div class="rounded-full overflow-hidden border-2 border-techBlue/50 w-32 h-32 mx-auto">
+                                    <img src="小车.jpg" 
+                                         alt="社员照片" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-center mt-3 text-techCyan font-medium">小车 | 大二 | 机械工程系</p>
+                            </div>
+                            
+                            <div class="md:w-3/4 space-y-4">
+                                <h3 class="text-xl font-semibold text-techBlue">贝斯：我的解压神器与精神寄托</h3>
+                                <p class="text-techLight leading-relaxed">
+                                    作为一名机械工程系的学生，我的专业课程非常繁重，每天都要面对复杂的公式、严谨的图纸和高强度的实验。刚上大一时，我常常感到压力巨大，不知道该如何调节自己的情绪。一次偶然的机会，我看到了贝斯社的招新宣传，抱着试一试的心态加入了社团，没想到这成为了我大学生活中最正确的决定。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    刚开始学习贝斯时，我完全是个零基础的小白，连贝斯有几根弦都不知道。但社团的学长学姐们非常耐心，从最基础的乐理知识教起，一步步引导我走进贝斯的世界。每次练习时，当指尖在琴弦上滑动，低沉而富有律动的音色响起，我都会感到无比放松，所有的压力和烦恼都烟消云散。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    贝斯成为了我的"解压神器"。每当学习累了、压力大了，我都会拿出贝斯弹上一会儿。无论是简单的分解和弦，还是复杂的独奏曲目，都能让我静下心来，重新找回状态。慢慢地，贝斯不仅是我的解压工具，更成为了我的精神寄托。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    在社团里，我结识了一群志同道合的朋友。我们有着不同的专业背景，但都热爱音乐、热爱贝斯。我们会一起参加训练、一起讨论曲目、一起组建乐队。在这个过程中，我不仅提高了自己的演奏技巧，还学会了如何与人沟通、如何团队协作。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    记得有一次，我们乐队要参加校园音乐节的演出，时间非常紧张，曲目难度也很大。那段时间，我们每天晚上都在排练厅练习到很晚，反复打磨每一个细节。虽然很累，但每当我们合奏出和谐的旋律时，所有的疲惫都烟消云散了。最终，我们的演出获得了圆满成功，台下观众的掌声和欢呼声让我感受到了前所未有的成就感。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    加入贝斯社以来，我的大学生活变得更加丰富多彩。我不仅学会了一门乐器，还收获了珍贵的友谊、提高了自己的综合素质。贝斯让我在繁重的学业之余找到了乐趣，让我变得更加自信、更加开朗。
+                                </p>
+                                <p class="text-techLight leading-relaxed">
+                                    如果你也觉得大学生活有些单调，如果你也想找到一个释放压力、陶冶情操的方式，如果你也热爱音乐，那么欢迎加入贝斯社。在这里，你不需要有任何基础，只要你有一颗热爱音乐的心，我们就会为你提供最专业的指导、最温暖的陪伴和最广阔的舞台。相信贝斯会给你的大学生活带来不一样的色彩，让你收获意想不到的成长和感动。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-techDark bg-opacity-50 rounded-xl p-6 border border-techBlue/20 text-center">
+                    <p class="text-techLight italic text-lg">
+                        "音乐是灵魂的语言，贝斯是律动的心跳。在这里，我们用低频连接彼此，用音乐传递热爱。无论你是谁，无论你来自哪里，只要你热爱音乐，贝斯社就永远为你敞开大门。"
+                    </p>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#top" class="inline-flex items-center text-techBlue hover:text-techCyan transition-colors bg-techDark bg-opacity-50 px-6 py-2 rounded-md border border-techBlue/30">
+                        <i class="fa fa-arrow-up mr-2"></i>返回顶部
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-1 bg-gradient(90deg, transparent, #165DFF, #00C48C, transparent) my-16"></div>
+
+        <!-- 五、在线报名表 -->
+        <section id="signup" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-techBlue text-glow mb-4">五、贝斯社在线报名表</h2>
+                    <div class="w-32 h-1 bg-gradient(90deg, transparent, #165DFF, transparent) mx-auto"></div>
+                    <p class="mt-6 text-techGray text-lg">
+                        请认真填写以下信息，确保联系方式准确无误，提交后我们将尽快与你联系
+                    </p>
+                </div>
+                
+                <!-- 表单：表格布局 -->
+                <div class="tech-card-hover bg-techDark bg-opacity-70 rounded-xl p-6 md:p-8 border border-techBlue/30">
+                    <form id="signup-form" class="space-y-6">
+                        <table class="w-full">
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4 w-1/3 text-techLight font-medium">姓名：</td>
+                                    <td class="py-3 px-4 w-2/3">
+                                        <input type="text" name="username" class="form-input w-full px-4 py-2 rounded-md" placeholder="请输入你的姓名" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">性别：</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-6">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="gender" value="男" class="text-techBlue" checked>
+                                                <span class="ml-2 text-techLight">男</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="gender" value="女" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">女</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">出生日期：</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-3">
+                                            <input type="text" name="year" class="form-input w-24 px-4 py-2 rounded-md" placeholder="年" required>
+                                            <input type="text" name="month" class="form-input w-20 px-4 py-2 rounded-md" placeholder="月" required>
+                                            <input type="text" name="day" class="form-input w-20 px-4 py-2 rounded-md" placeholder="日" required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">手机号码：</td>
+                                    <td class="py-3 px-4">
+                                        <input type="tel" name="phone" class="form-input w-full px-4 py-2 rounded-md" placeholder="请输入你的手机号码" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">电子邮箱：</td>
+                                    <td class="py-3 px-4">
+                                        <input type="email" name="email" class="form-input w-full px-4 py-2 rounded-md" placeholder="请输入你的电子邮箱" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">是否有贝斯基础：</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex flex-wrap gap-4">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="base" value="无基础" class="text-techBlue" checked>
+                                                <span class="ml-2 text-techLight">无基础</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="base" value="入门水平" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">入门水平</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="base" value="中级水平" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">中级水平</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="base" value="高级水平" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">高级水平</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">兴趣方向（可多选）：</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex flex-wrap gap-4">
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="摇滚风格演奏" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">摇滚风格演奏</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="爵士风格演奏" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">爵士风格演奏</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="流行风格演奏" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">流行风格演奏</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="音乐创作" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">音乐创作</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="乐队合奏" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">乐队合奏</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" name="hobby" value="音乐制作" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">音乐制作</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">年级：</td>
+                                    <td class="py-3 px-4">
+                                        <select name="grade" class="form-input w-full px-4 py-2 rounded-md" required>
+                                            <option value="大一">大一</option>
+                                            <option value="大二">大二</option>
+                                            <option value="大三">大三</option>
+                                            <option value="大四">大四</option>
+                                            <option value="研究生">研究生</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">院系：</td>
+                                    <td class="py-3 px-4">
+                                        <input type="text" name="department" class="form-input w-full px-4 py-2 rounded-md" placeholder="请输入你的院系" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium vertical-top">自我介绍：</td>
+                                    <td class="py-3 px-4">
+                                        <textarea name="intro" rows="5" class="form-input w-full px-4 py-2 rounded-md" placeholder="请简单介绍自己、以及加入贝斯社的理由……" required></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-techLight font-medium">是否服从活动安排：</td>
+                                    <td class="py-3 px-4">
+                                        <div class="flex space-x-6">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="obey" value="是" class="text-techBlue" checked>
+                                                <span class="ml-2 text-techLight">是</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="obey" value="否" class="text-techBlue">
+                                                <span class="ml-2 text-techLight">否</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="py-6 text-center">
+                                        <button type="submit" class="btn-primary px-8 py-3 rounded-md text-lg mr-4">
+                                            <i class="fa fa-paper-plane mr-2"></i>提交报名
+                                        </button>
+                                        <button type="reset" class="btn-secondary px-8 py-3 rounded-md text-lg">
+                                            <i class="fa fa-refresh mr-2"></i>重置表单
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                
+                <div class="mt-10 bg-techDark bg-opacity-50 rounded-xl p-6 border border-techBlue/20">
+                    <p class="text-center text-techLight">
+                        提交表单后，如需修改信息可再次填写提交最新版本。如有疑问，请联系：小李电话：   %#@$&*%#X                    </p>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#top" class="inline-flex items-center text-techBlue hover:text-techCyan transition-colors bg-techDark bg-opacity-50 px-6 py-2 rounded-md border border-techBlue/30">
+                        <i class="fa fa-arrow-up mr-2"></i>返回顶部
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-techDark bg-opacity-90 border-t border-techBlue/30 py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <h3 class="text-2xl font-bold mb-2 text-techBlue text-glow font-tech">校园贝斯社</h3>
+                    <p class="text-techGray">低频共振 · 燃动青春</p>
+                    <p class="text-techGray mt-2">© 2025 校园贝斯社 版权所有</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-6 mb-4">
+                        <a href="#" class="text-techGray hover:text-techBlue transition-colors text-xl">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="text-techGray hover:text-techBlue transition-colors text-xl">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="text-techGray hover:text-techBlue transition-colors text-xl">
+                            <i class="fa fa-qq"></i>
+                        </a>
+                        <a href="#" class="text-techGray hover:text-techBlue transition-colors text-xl">
+                            <i class="fa fa-bilibili"></i>
+                        </a>
+                    </div>
+                    <p class="text-techGray">咨询电话：%#@$&*%#X</p>
+                    <p class="text-techGray mt-1">邮箱：123123123@123123.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 报名成功弹窗 -->
+    <div id="success-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="absolute inset-0 bg-techDark bg-opacity-80 backdrop-blur-sm" id="modal-overlay"></div>
+        <div class="bg-techDark border border-techBlue/50 rounded-xl p-8 max-w-md w-full relative z-10 tech-card-hover">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-techBlue/20 text-techBlue mb-6">
+                    <i class="fa fa-check text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-techBlue mb-4">报名成功！</h3>
+                <p class="text-techLight mb-6">感谢你的报名，我们将在3个工作日内与你联系，请保持手机畅通。</p>
+                <button id="close-modal" class="btn-primary px-8 py-3 rounded-md text-lg">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 背景音乐控制
+        const musicToggle = document.getElementById('music-toggle');
+        const backgroundMusic = document.getElementById('background-music');
+        let isPlaying = false;
+        
+        musicToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                musicToggle.innerHTML = '<i class="fa fa-music text-xl mr-2"></i><span class="text-sm">播放音乐</span>';
+            } else {
+                backgroundMusic.play().catch(function(error) {
+                    console.log("自动播放被阻止，需要用户交互:", error);
+                    alert("请点击播放按钮以播放背景音乐");
+                });
+                musicToggle.innerHTML = '<i class="fa fa-pause text-xl mr-2"></i><span class="text-sm">暂停音乐</span>';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // 表单提交处理
+        const signupForm = document.getElementById('signup-form');
+        const successModal = document.getElementById('success-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 模拟表单提交
+            setTimeout(function() {
+                successModal.classList.remove('hidden');
+                signupForm.reset();
+            }, 800);
+        });
+        
+        // 关闭弹窗
+        closeModal.addEventListener('click', function() {
+            successModal.classList.add('hidden');
+        });
+        
+        modalOverlay.addEventListener('click', function() {
+            successModal.classList.add('hidden');
+        });
+        
+        // 页面滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.add('border-b-techBlue/30');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.remove('border-b-techBlue/30');
+            }
+        });
+        
+        // 图片懒加载
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll("img");
+            
+            if ("IntersectionObserver" in window) {
+                const imageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            image.classList.add('opacity-100');
+                            image.classList.remove('opacity-0');
+                            imageObserver.unobserve(image);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(image) {
+                    image.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                    imageObserver.observe(image);
+                });
+            }
+        });
+// 视频播放控制
+const video = document.getElementById('promo-video');
+const playButton = document.getElementById('play-button');
+
+playButton.addEventListener('click', function() {
+    // 隐藏播放按钮
+    playButton.style.display = 'none';
+    // 播放视频
+    video.play().catch(error => {
+        console.log('播放失败:', error);
+        // 如果自动播放被浏览器阻止，显示提示
+        playButton.style.display = 'flex';
+        alert('请允许视频播放以观看社团宣传内容');
+    });
+});
+
+// 视频结束后显示播放按钮
+video.addEventListener('ended', function() {
+    playButton.style.display = 'flex';
+});
+    </script>
+</body>
+</html>
