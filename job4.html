@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影像与文学讨论夜 · Film & Literature Talk</title>
+    <style>
+        /* 全局重置 - 干净无冗余 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fff; /* 纯白色背景，无任何底纹 */
+            font-family: "Microsoft YaHei", "SimSun", serif;
+            color: #333;
+            line-height: 1.9;
+            padding: 40px 20px;
+            text-align: center; /* 因.page是inline-block，需让父容器居中 */
+        }
+
+        /* 必须声明的.page样式 - 仅修改背景色，其他属性完全保留 */
+        .page {
+            display: inline-block;
+            background-color: #fff; /* 改为纯白色背景，符合无背景要求 */
+            box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+            text-align: left;
+            max-width: 720px;
+        }
+
+        /* 简约古风花纹装饰（顶部+底部） */
+        .decor-top, .decor-bottom {
+            width: 720px;
+            max-width: 100%;
+            height: 30px;
+            margin: 20px auto;
+            background: url('https://picsum.photos/id/175/1200/60') no-repeat center;
+            background-size: contain;
+            opacity: 0.3;
+        }
+
+        /* 标题区 - 还原原始名称，简约大气 */
+        h1 {
+            font-family: "Microsoft YaHei", "SimHei", serif;
+            font-size: 32px;
+            color: #5d2906;
+            text-align: center;
+            margin: 0 30px 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4a373;
+            letter-spacing: 8px;
+        }
+
+        h2 {
+            font-family: "Microsoft YaHei", serif;
+            font-size: 24px;
+            color: #6d4c41;
+            margin: 40px 30px 20px;
+            padding-left: 20px;
+            border-left: 4px solid #b98b57;
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+        }
+
+        h2:hover {
+            color: #8b4513;
+            transform: translateX(6px);
+        }
+
+        h3 {
+            font-family: "Microsoft YaHei", serif;
+            font-size: 20px;
+            color: #795548;
+            margin: 35px 30px 15px;
+            text-align: center;
+            letter-spacing: 3px;
+            padding: 8px 0;
+            border-top: 1px dashed #d4a373;
+            border-bottom: 1px dashed #d4a373;
+        }
+
+        /* 段落 - 还原原始文字，干净通透 */
+        p {
+            font-size: 17px;
+            color: #3e2723;
+            margin: 20px 30px;
+            text-indent: 2em;
+            line-height: 1.9;
+            font-family: "SimSun", serif;
+        }
+
+        /* 首字放大 - 简约古风 */
+        p::first-letter {
+            font-size: 38px;
+            font-family: "STKaiti", serif;
+            font-weight: bold;
+            float: left;
+            margin-right: 12px;
+            line-height: 1.2;
+            color: #8b4513;
+        }
+
+        /* 重要提示 - 还原原始文字，简约边框 */
+        p#intro {
+            border: 1px dashed #b98b57;
+            padding: 20px 25px;
+            margin: 30px auto;
+            width: 85%;
+            border-radius: 8px;
+            text-indent: 0;
+            position: relative;
+            font-size: 17px;
+            color: #b71c1c;
+            font-weight: bold;
+            line-height: 2;
+            background-color: #FFF3E0;
+        }
+
+        p#intro::before {
+            content: '提示';
+            position: absolute;
+            left: 20px;
+            top: -12px;
+            background: #fff;
+            padding: 0 10px;
+            color: #b71c1c;
+            font-family: "Microsoft YaHei", serif;
+        }
+
+        /* 表格 - 还原原始表头和内容，简约线条 */
+        table {
+            width: calc(100% - 60px);
+            margin: 20px 30px 30px;
+            border-collapse: collapse;
+            border: 1px solid #d4a373;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #FFF3E0;
+            color: #503A23;
+            font-family: "Microsoft YaHei", serif;
+            font-size: 17px;
+            padding: 12px;
+            border: 1px solid #e0c9a6;
+        }
+
+        td {
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #e0c9a6;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        tr:hover td {
+            background: #FFF8E7;
+        }
+
+        /* 链接样式 - 还原原始效果，简约下划线 */
+        a {
+            color: #1565C0;
+            text-decoration: none;
+            font-family: "Microsoft YaHei", serif;
+            position: relative;
+            padding: 2px 0;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #8b4513;
+            transition: width 0.3s ease;
+        }
+
+        a:hover {
+            color: #D32F2F;
+            text-decoration: underline;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* 按钮式链接 - 还原原始名称和样式 */
+        a.red, a.blue {
+            display: inline-block;
+            padding: 10px 25px;
+            margin: 0 10px;
+            border-radius: 4px;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        a.red {
+            color: #D32F2F;
+            border-color: #D32F2F;
+            background: transparent;
+        }
+
+        a.red:hover {
+            background: #D32F2F;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(183, 28, 28, 0.2);
+            text-decoration: none;
+        }
+
+        a.blue {
+            color: #1976D2;
+            border-color: #1976D2;
+            background: transparent;
+        }
+
+        a.blue:hover {
+            background: #1976D2;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(13, 71, 161, 0.2);
+            text-decoration: none;
+        }
+
+        /* 公告区 - 还原原始文字，简约边框 */
+        .notice {
+            border: 1px solid #d4a373;
+            border-radius: 8px;
+            padding: 25px 20px;
+            margin: 35px 30px;
+            position: relative;
+            background-color: #FFF3E0;
+        }
+
+        .notice::before {
+            content: '公告';
+            position: absolute;
+            left: 20px;
+            top: -12px;
+            background: #fff;
+            padding: 0 15px;
+            color: #8b4513;
+            font-family: "Microsoft YaHei", serif;
+            font-size: 18px;
+        }
+
+        .notice p {
+            text-indent: 0;
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 16px;
+            color: #3E2723;
+        }
+
+        .notice p::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #8b4513;
+            font-size: 22px;
+        }
+
+        /* 链接容器 - 简约虚线分隔 */
+        .link-container {
+            text-align: center;
+            margin: 40px 30px;
+            padding: 20px 0;
+            border-top: 1px dashed #d4a373;
+            border-bottom: 1px dashed #d4a373;
+        }
+
+        /* 动画 - 简约渐入 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .page {
+                padding: 30px 15px;
+            }
+            h1 {
+                font-size: 28px;
+                letter-spacing: 4px;
+                margin-bottom: 30px;
+            }
+            h2 {
+                font-size: 22px;
+                margin: 30px 15px 15px;
+            }
+            h3 {
+                font-size: 18px;
+                letter-spacing: 2px;
+                margin: 30px 15px 15px;
+            }
+            p {
+                font-size: 16px;
+                margin: 15px 15px;
+            }
+            a.red, a.blue {
+                padding: 8px 18px;
+                margin: 0 5px 10px;
+                font-size: 16px;
+            }
+            table {
+                width: calc(100% - 30px);
+                margin: 15px;
+                font-size: 14px;
+            }
+            th, td {
+                padding: 10px 5px;
+            }
+            .notice {
+                margin: 30px 15px;
+                padding: 20px 15px;
+            }
+            .notice p {
+                padding-left: 20px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部简约古风花纹装饰 -->
+    <div class="decor-top"></div>
+
+    <!-- 调用.page样式，严格按要求添加 -->
+    <div class="page">
+        <!-- 顶部标题区 - 还原原始名称 -->
+        <div>
+            <h1>影像与文学讨论夜 · Film & Literature Talk</h1>
+        </div>
+
+        <!-- 活动介绍区 - 还原原始文字内容 -->
+        <div>
+            <h2>活动介绍</h2>
+            <p>影像与文学，是人类表达情感、传递思想的两大艺术载体。当镜头捕捉的光影与文字构筑的世界相遇，便会碰撞出超越媒介本身的独特火花。本社团致力于为所有热爱电影与文学的朋友搭建交流平台，通过深度讨论、观点碰撞、灵感分享，探索影像背后的文学内核，挖掘文学作品的视觉表达。</p>
+            <p>在往期活动中，我们曾围绕宫崎骏的经典动画《千与千寻》展开热烈探讨——从千寻的成长之旅看现代社会的孤独与救赎，从汤屋的奇幻设定解读日本传统文化中的"物哀"美学；也曾深度剖析安托万·德·圣-埃克苏佩里的《The Little Prince》，探讨童真、爱与责任的永恒主题如何通过简洁的文字和诗意的画面打动全球读者。每一次讨论，都是一次思想的远行，让我们在他人的观点中看见更广阔的世界。</p>
+            
+            <p id="intro">重要提示：本次招新面向全体在校学生，无需专业基础，只要你对电影或文学抱有热情，愿意倾听与表达，均可报名参与！活动全程免费，将提供相关阅读材料与观影资源，加入后还可参与专属线下沙龙与创作者分享会。</p>
+        </div>
+
+        <!-- 活动报名信息表格区 - 还原原始表头和内容 -->
+        <div>
+            <h3>活动场次与报名信息</h3>
+            <table>
+                <tr>
+                    <th>场次</th>
+                    <th>活动时间</th>
+                    <th>活动地点</th>
+                    <th>讨论主题</th>
+                    <th>主讲人</th>
+                    <th>报名链接</th>
+                </tr>
+                <tr>
+                    <td>第1场</td>
+                    <td>2024年10月18日 19:00</td>
+                    <td>学术报告厅201</td>
+                    <td>《千与千寻》的象征主义与成长叙事</td>
+                    <td>李教授（文学系）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+                <tr>
+                    <td>第2场</td>
+                    <td>2024年10月25日 19:00</td>
+                    <td>图书馆3楼研讨室</td>
+                    <td>《The Little Prince》的哲学思考与跨媒介改编</td>
+                    <td>张老师（外语学院）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+                <tr>
+                    <td>第3场</td>
+                    <td>2024年11月1日 19:00</td>
+                    <td>学术报告厅201</td>
+                    <td>《百年孤独》的魔幻现实主义与影像表达难点</td>
+                    <td>王博士（比较文学研究所）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+                <tr>
+                    <td>第4场</td>
+                    <td>2024年11月8日 19:00</td>
+                    <td>图书馆3楼研讨室</td>
+                    <td>《寄生虫》的社会批判与文学性隐喻</td>
+                    <td>刘老师（电影学系）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+                <tr>
+                    <td>第5场</td>
+                    <td>2024年11月15日 19:00</td>
+                    <td>学术报告厅201</td>
+                    <td>《红楼梦》的影视改编与文化传承</td>
+                    <td>陈教授（中文系）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+                <tr>
+                    <td>第6场</td>
+                    <td>2024年11月22日 19:00</td>
+                    <td>图书馆3楼研讨室</td>
+                    <td>《星际穿越》的科幻叙事与人文情怀</td>
+                    <td>赵老师（物理系）</td>
+                    <td><a href="#sign-up">立即报名</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 页面链接区 - 还原原始按钮文字 -->
+        <div>
+            <h3>相关链接</h3>
+            <div class="link-container">
+                <a href="https://hongchenwusdnu.github.io/bookstore/job4.html" class="red" target="_blank">查看往期活动照片</a>
+                <a href="job3.html" class="blue" target="_blank">在线咨询活动详情</a>
+            </div>
+        </div>
+
+        <!-- 底部公告区 - 还原原始文字内容 -->
+        <div class="notice">
+            <h3 style="display: none;">公告通知</h3>
+            <p>1. 报名成功后将通过短信发送确认信息，请保持手机畅通；活动当天需凭学生证或校园卡入场，提前15分钟签到。</p>
+            <p>2. 为保证讨论质量，每场活动人数限制为80人，先到先得；若无法按时参加，请至少提前24小时通过报名链接取消预约，否则将影响后续活动报名资格。</p>
+            <p>3. 活动期间将进行拍照记录，照片将用于社团宣传（如介意请提前告知工作人员）；欢迎携带相关书籍、笔记参与分享，也可提前阅读讨论主题相关资料，让交流更有深度。</p>
+            <p>4. 社团长期招募志愿者，负责活动组织、资料整理、现场协调等工作，有意者可在活动现场咨询工作人员，或通过在线咨询链接提交申请。</p>
+        </div>
+    </div>
+
+    <!-- 底部简约古风花纹装饰 -->
+    <div class="decor-bottom"></div>
+
+    <!-- 简约加载动画 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('h2, p, table, .link-container, .notice');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(15px)';
+                el.style.transition = 'all 0.8s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 300 + index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
