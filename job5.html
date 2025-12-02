@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>李氏电商 · 订单录入与销售看板</title>
+  <style>
+    /* 全局样式重置与基础设置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "SimSun", "STKaiti", serif;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.04 0"/></filter><rect width="200" height="200" filter="url(%23noise)" fill="none"/></svg>') repeat, #f7f5f0;
+      color: #333;
+      line-height: 1.8;
+      background-attachment: fixed;
+    }
+    
+    /* 水墨装饰元素 */
+    .ink-splash {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.03);
+      filter: blur(40px);
+      z-index: -1;
+    }
+    
+    .ink1 { top: 15%; left: 8%; width: 200px; height: 200px; }
+    .ink2 { top: 50%; right: 5%; width: 180px; height: 180px; }
+    .ink3 { bottom: 10%; left: 20%; width: 150px; height: 150px; }
+    
+    /* 容器样式 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      position: relative;
+    }
+    
+    /* 标题样式 */
+    h1 {
+      font-family: "Ma Shan Zheng", cursive;
+      font-size: 3rem;
+      color: #222;
+      text-align: center;
+      margin: 20px 0 10px;
+      text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+      font-family: "STKaiti", serif;
+      font-size: 1.6rem;
+      color: #444;
+      margin: 25px 0 15px;
+      padding-left: 12px;
+      border-left: 3px solid #666;
+    }
+    
+    p {
+      font-size: 1.05rem;
+      color: #555;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    /* 提示框样式 */
+    .tip-box {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-size: 15px;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tip-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+    }
+    
+    .tip-primary {
+      background: rgba(238, 249, 255, 0.8);
+      border: 1px solid rgba(100, 181, 246, 0.3);
+    }
+    
+    .tip-primary::before {
+      background: #4299e1;
+    }
+    
+    .tip-success {
+      background: rgba(250, 253, 245, 0.8);
+      border: 1px solid rgba(132, 204, 22, 0.3);
+    }
+    
+    .tip-success::before {
+      background: #9f7aea;
+    }
+    
+    .tip-info {
+      background: rgba(245, 245, 245, 0.8);
+      border: 1px solid rgba(204, 204, 204, 0.3);
+    }
+    
+    .tip-info::before {
+      background: #718096;
+    }
+    
+    .tip-box strong {
+      color: #2d3748;
+    }
+    
+    .tip-box ul {
+      margin: 10px 0 0 25px;
+    }
+    
+    /* 时钟样式 */
+    .clock {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2d3748;
+      text-align: center;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      font-family: "STKaiti", serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    /* 盒子样式 */
+    .box {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    
+    .box::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M10 30C10 35.5228 14.4772 40 20 40C25.5228 40 30 35.5228 30 30C30 24.4772 25.5228 20 20 20C14.4772 20 10 24.4772 10 30Z" fill="rgba(0,0,0,0.02)"/></svg>') no-repeat bottom right;
+      opacity: 0.6;
+    }
+    
+    /* 表单样式 */
+    label {
+      display: inline-block;
+      width: 130px;
+      font-size: 1.05rem;
+      color: #4a5568;
+      font-weight: 500;
+    }
+    
+    input[type="text"],
+    input[type="checkbox"] {
+      padding: 10px 12px;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.9);
+      transition: all 0.3s ease;
+    }
+    
+    input[type="text"] {
+      width: calc(100% - 140px);
+      max-width: 400px;
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4299e1;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    }
+    
+    select {
+      padding: 10px 12px;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.9);
+      width: calc(100% - 140px);
+      max-width: 400px;
+      transition: all 0.3s ease;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: #4299e1;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    }
+    
+    button {
+      background: #2d3748;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "STKaiti", serif;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background: #4a5568;
+      transform: translateY(-2px);
+    }
+    
+    /* 表格样式 */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 15px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    
+    th {
+      background: rgba(247, 250, 252, 0.8);
+      color: #2d3748;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    
+    tr:nth-child(even) {
+      background: rgba(247, 250, 252, 0.5);
+    }
+    
+    tr:hover {
+      background: rgba(237, 247, 255, 0.4);
+    }
+    
+    /* 订单结果样式 */
+    #orderResult {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(245, 24afe, 245, 0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(100, 181, 246, 0.2);
+    }
+    
+    #orderResult h3 {
+      font-family: "STKaiti", serif;
+      color: #2d3748;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    #orderResult p {
+      text-align: left;
+      margin: 8px 0;
+      color: #4a5568;
+    }
+    
+    #orderResult .优惠详情 {
+      background: rgba(238, 242, 246, 0.7);
+      padding: 12px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    
+    #dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    #dashboard p {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 12px;
+      background: rgba(247, 250, 252, 0.8);
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      label {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+      
+      input[type="text"],
+      select {
+        width: 100%;
+        max-width: none;
+      }
+      
+      #dashboard {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <!-- 引入书法字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 水墨装饰背景 -->
+  <div class="ink-splash ink1"></div>
+  <div class="ink-splash ink2"></div>
+  <div class="ink-splash ink3"></div>
+  
+  <div class="container">
+    <!-- ===================== 顶部标题 ===================== -->
+    <script>
+      /**
+       * document.write()
+       * 功能：向 HTML 页面“直接写入”内容，相当于插入 HTML 代码。
+       * 特点：在页面加载时执行，适合输出标题、提示区域。
+       */
+      document.write("<h1>李氏电商 · 运营后台 · 订单录入与销售看板</h1>");
+      document.write("<p>欢迎使用内部工具，实时查看订单与销售情况。</p>");
+
+      // ===================== 全局优惠 + 加价温馨提示 =====================
+      document.write(`
+      <div class="tip-box tip-primary">
+        <strong>💡 温馨提示：本店当前可享受的优惠与加价政策如下：</strong>
+        <ul>
+          <li>🎉 VIP 客户享受 <strong>9 折优惠</strong></li>
+          <li>⚡ 加急发货价格会 <strong>×1.1</strong></li>
+          <li>⏰ 每小时前 10 分钟再享 <strong>8.5 折</strong></li>
+        </ul>
+      </div>
+      `);
+
+      // ===================== 当前分钟动态活动提示 =====================
+      var nowForBanner = new Date();            // Date()：创建一个时间对象
+      var minuteForBanner = nowForBanner.getMinutes(); // getMinutes()：获取当前分钟（0–59）
+
+      if (minuteForBanner >= 0 && minuteForBanner <= 9) {
+        document.write(`
+          <div class="tip-box tip-success">
+            ⏳ 当前为前 10 分钟！本单可额外享受 <strong>8.5 折</strong> 时段优惠！
+          </div>
+        `);
+      } else {
+        document.write(`
+          <div class="tip-box tip-info">
+            🕒 小贴士：每个整点前 10 分钟享受 8.5 折优惠，请留意下单时间～
+          </div>
+        `);
+      }
+    </script>
+
+    <!-- ===================== 时钟区 ===================== -->
+    <div class="box">
+      <h2>当前系统时间</h2>
+      <!-- 此区域的文字由 JavaScript 动态更新 -->
+      <div id="clock" class="clock"></div>
+    </div>
+
+    <!-- ===================== 订单录入 ===================== -->
+    <div class="box">
+      <h2>新建订单</h2>
+
+      <!-- onsubmit="return validateForm()"：提交表单前调用 JS 做校验 -->
+      <form onsubmit="return validateForm();">
+        <p>
+          <label>客户名称：</label>
+          <input type="text" id="customerName" placeholder="请输入客户姓名">
+        </p>
+        <p>
+          <label>商品单价（¥）：</label>
+          <input type="text" id="priceInput" placeholder="请输入商品单价">
+        </p>
+        <p>
+          <label>数量（件）：</label>
+          <input type="text" id="qtyInput" placeholder="请输入购买数量">
+        </p>
+        <p>
+          <label>客户类型：</label>
+          <select id="customerType">
+            <option value="normal">普通客户</option>
+            <option value="vip">VIP 客户</option>
+          </select>
+        </p>
+        <p>
+          <label>加急发货：</label>
+          <input type="checkbox" id="urgentFlag"> 是
+        </p>
+        <p><button type="submit">添加订单</button></p>
+      </form>
+
+      <div id="orderResult"></div>
+    </div>
+
+    <!-- ===================== 销售看板 ===================== -->
+    <div class="box">
+      <h2>销售看板</h2>
+      <div id="dashboard"></div>
+      <div id="orderTable"></div>
+    </div>
+  </div>
+
+  <script>
+    // ================================================================
+    //                          模拟时钟功能
+    // ================================================================
+
+    /**
+     * padZero(n)
+     * 功能：将数字补零，例如 7 → "07"
+     * 用途：让日期时间保持两位展示格式
+     */
+    function padZero(n) {
+      return n < 10 ? "0" + n : n;
+    }
+
+    /**
+     * updateClock()
+     * 功能：获取当前时间 → 格式化 → 写入页面
+     * 技术点：
+     *   - Date()                  获取当前时间
+     *   - getElementById()        获取页面指定 id 的元素
+     *   - innerHTML               用于设置元素的 HTML 内容
+     */
+    function updateClock() {
+      var now = new Date();
+      var y = now.getFullYear();
+      var m = now.getMonth() + 1;
+      var d = now.getDate();
+      var hh = now.getHours();
+      var mm = now.getMinutes();
+      var ss = now.getSeconds();
+
+      var weekNames = ["日", "一", "二", "三", "四", "五", "六"];
+      var w = weekNames[now.getDay()];
+
+      var timeStr =
+        y + "年" + padZero(m) + "月" + padZero(d) +
+        "日 星期" + w + " " +
+        padZero(hh) + ":" + padZero(mm) + ":" + padZero(ss);
+
+      // document.getElementById("clock")
+      // 功能：返回页面中 id="clock" 的那个元素
+      document.getElementById("clock").innerHTML = timeStr;
+    }
+
+    updateClock();               // 页面刚加载时调用一次
+    setInterval(updateClock, 1000); // setInterval：每 1000ms 调用一次 → 实现走动的时钟
+
+
+    // ================================================================
+    //                         全局订单数组
+    // ================================================================
+    /**
+     * orders 数组，保存所有订单记录
+     * 每一个元素都是一个订单对象 {name, qty, price, finalTotal ... }
+     */
+    var orders = [];
+
+
+
+    // ================================================================
+    //                         表单校验逻辑
+    // ================================================================
+    function validateForm() {
+      /**
+       * document.getElementById("xxx").value
+       * 说明：从页面中获取 id="xxx" 的输入框内容
+       */
+      var nameStr = document.getElementById("customerName").value;
+      var priceStr = document.getElementById("priceInput").value;
+      var qtyStr = document.getElementById("qtyInput").value;
+      var typeStr = document.getElementById("customerType").value;
+      var urgentChecked = document.getElementById("urgentFlag").checked;
+
+      var valid = true;
+
+      // 客户名称校验
+      if (nameStr == null || nameStr.trim() === "") {
+        alert("客户名称不能为空！");
+        valid = false;
+      }
+
+      // parseFloat()：把字符串转成浮点型数字
+      var price = parseFloat(priceStr);
+      if (isNaN(price) || price <= 0) {
+        alert("商品单价必须是大于 0 的数字！");
+        valid = false;
+      }
+
+      // parseInt()：把字符串转成整数
+      var qty = parseInt(qtyStr, 10);
+      if (isNaN(qty) || qty <= 0) {
+        alert("数量必须是大于 0 的整数！");
+        valid = false;
+      }
+
+      if (!valid) {
+        document.getElementById("orderResult").innerHTML =
+          "<p>订单录入失败，请检查输入。</p>";
+        return false;
+      }
+
+      processOrder(nameStr.trim(), price, qty, typeStr === "vip", urgentChecked);
+      return false;
+    }
+
+
+
+    // ================================================================
+    //                         订单业务逻辑
+    // ================================================================
+    function processOrder(customerName, price, quantity, isVip, isUrgent) {
+      var baseTotal = price * quantity;
+
+      var afterVip = isVip ? baseTotal * 0.9 : baseTotal;
+
+      var afterUrgent = isUrgent ? afterVip * 1.1 : afterVip;
+
+      var now = new Date();
+      var minute = now.getMinutes();
+
+      var hitTimeDiscount = false;
+      var finalTotal = afterUrgent;
+
+      if (minute >= 0 && minute <= 9) {
+        finalTotal *= 0.85;
+        hitTimeDiscount = true;
+      }
+
+      // 普通客户满200减10元逻辑（保留原始需求）
+      if (!isVip && finalTotal > 200) {
+        finalTotal = Math.max(0, finalTotal - 10);
+      }
+
+      var isImportant = isVip && finalTotal > 1000;
+
+      var tipsHtml = "<ul>";
+      tipsHtml += isVip ? "<li>VIP 9折已应用</li>" : "<li>普通客户无 VIP 优惠</li>";
+      tipsHtml += isUrgent ? "<li>加急 ×1.1 已应用</li>" : "<li>未加急</li>";
+      tipsHtml += hitTimeDiscount ? "<li>命中前十分钟 ×0.85</li>" : "<li>无时段折扣</li>";
+      // 显示满减信息
+      if (!isVip && finalTotal + 10 > 200) {
+        tipsHtml += "<li>普通客户满200减10元</li>";
+      }
+      tipsHtml += "</ul>";
+
+      document.getElementById("orderResult").innerHTML =
+        "<h3>订单录入成功：</h3>" +
+        "<p>客户名称：" + customerName + "</p>" +
+        "<p>基础金额：¥" + baseTotal.toFixed(2) + "</p>" +
+        "<p>VIP 后：¥" + afterVip.toFixed(2) + "</p>" +
+        "<p>加急后：¥" + afterUrgent.toFixed(2) + "</p>" +
+        "<p>最终金额：¥" + finalTotal.toFixed(2) + "</p>" +
+        "<p>订单类型：" + (isImportant ? "大额 VIP" : "普通订单") + "</p>" +
+        "<div class='优惠详情'>优惠详情：" + tipsHtml + "</div>";
+
+      orders.push({
+        name: customerName,
+        price: price,
+        qty: quantity,
+        baseTotal: baseTotal,
+        finalTotal: finalTotal,
+        isVip: isVip,
+        isUrgent: isUrgent,
+        hitTimeDiscount: hitTimeDiscount
+      });
+
+      renderDashboard();
+    }
+
+
+
+    // ================================================================
+    //                         销售看板
+    // ================================================================
+    function renderDashboard() {
+      var count = orders.length;
+      var totalSales = 0;
+
+      // for 循环累加订单金额（知识点：循环语句）
+      for (var i = 0; i < orders.length; i++) {
+        totalSales += orders[i].finalTotal;
+      }
+
+      var avg = count > 0 ? totalSales / count : 0;
+
+      /**
+       * innerHTML:
+       * 功能：修改一个元素内部显示的 HTML 内容
+       * 用法：document.getElementById(xxx).innerHTML = "内容";
+       */
+      document.getElementById("dashboard").innerHTML =
+        "<p>订单数：<strong>" + count + "</strong> 笔</p>" +
+        "<p>销售总额：<strong>¥" + totalSales.toFixed(2) + "</strong></p>" +
+        "<p>平均客单价：<strong>¥" + avg.toFixed(2) + "</strong></p>";
+
+      var tableHtml = "<table><tr>" +
+        "<th>客户名称</th><th>单价</th><th>数量</th><th>基础金额</th><th>最终金额</th><th>VIP</th><th>加急</th><th>前十分钟</th></tr>";
+
+      for (var j = 0; j < orders.length; j++) {
+        var o = orders[j];
+        tableHtml += "<tr>" +
+          "<td>" + o.name + "</td>" +
+          "<td>" + o.price.toFixed(2) + "</td>" +
+          "<td>" + o.qty + "</td>" +
+          "<td>" + o.baseTotal.toFixed(2) + "</td>" +
+          "<td>" + o.finalTotal.toFixed(2) + "</td>" +
+          "<td>" + (o.isVip ? "是" : "否") + "</td>" +
+          "<td>" + (o.isUrgent ? "是" : "否") + "</td>" +
+          "<td>" + (o.hitTimeDiscount ? "是" : "否") + "</td>" +
+          "</tr>";
+      }
+
+      tableHtml += "</table>";
+      document.getElementById("orderTable").innerHTML = tableHtml;
+    }
+  </script>
+</body>
+</html>
